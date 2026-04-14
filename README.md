@@ -1,8 +1,8 @@
-# 衣服智能推荐助手（Smart Clothing Recommendation Assistant）
+# 服装智能推荐助手（Smart Clothing Recommendation Assistant）
 
 ## 项目简介
 
-衣服智能推荐助手是一个基于RAG（Retrieval-Augmented Generation）技术的智能问答系统，专为服装相关问题提供专业、个性化的建议。该系统能够根据用户的身高、体重、偏好等信息，提供精准的服装推荐和搭配建议，同时回答关于服装保养、搭配技巧等问题。
+服装智能推荐助手是一个基于RAG（Retrieval-Augmented Generation）技术的智能问答系统，专为服装相关问题提供专业、个性化的建议。该系统能够根据用户的身高、体重、偏好等信息，提供精准的服装推荐和搭配建议，同时回答关于服装保养、搭配技巧等问题。
 
 ## 页面展示
 ### 问答页面
