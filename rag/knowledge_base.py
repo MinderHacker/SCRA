@@ -19,14 +19,15 @@ def check_md5(md5_str: str):
     检查传入的md5字符串是否已经被处理过
      return False(md5未处理过)  True(已经处理过，已有记录）
     """
-    if not os.path.exists("ma5_path"):
+    if not os.path.exists(config.md5_path):
         # 进入表示文件不存在，那肯定没有处理过这个md5了
         open(config.md5_path, "w", encoding='utf-8').close()
         return False
     else:
-        for line in open(config.md5_path, "r", encoding='utf-8').readlines():
-            if line.strip() == md5_str:
-                return True
+        with open(config.md5_path, "r", encoding='utf-8') as f:
+            for line in f.readlines():
+                if line.strip() == md5_str:
+                    return True
         return False
 
 
