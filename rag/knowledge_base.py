@@ -4,7 +4,7 @@
 
 from idlelib.iomenu import encoding
 from datetime import datetime
-from langchain_chroma import Chroma
+from langchain_milvus import Milvus
 from langchain_community.embeddings import DashScopeEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import config_data as config
@@ -62,11 +62,15 @@ class KnowledgeBaseService(object):
     """
 
     def __init__(self):
-        self.chroma = Chroma(
-            collection_name=config.collection_name,  # 数据库的表名
-            embedding_function=DashScopeEmbeddings(model="text-embedding-v4"),
-            persist_directory=config.persist_directory,  # 数据库本地存储文件夹
-        )  # 向量存储的实例，Chroma的存储对象
+        # self.chroma = Chroma(
+        #     collection_name=config.collection_name,  # 数据库的表名
+        #     embedding_function=DashScopeEmbeddings(model="text-embedding-v4"),
+        #     persist_directory=config.persist_directory,  # 数据库本地存储文件夹
+        # )  # 向量存储的实例，Chroma的存储对象
+        self.milvus=Milvus(collection_name=config.collection_name,
+                           embedding_function=DashScopeEmbeddings(model="text-embedding-v4"),
+                           connection_args={"uri": config.milvus_uri},
+                           auto_id=True)
         self.spliter = RecursiveCharacterTextSplitter(
             chunk_size=config.chunk_size,  # 分割后的文本段最大长度
             chunk_overlap=config.chunk_overlap,  # 连续文本段之间的字符重叠数量
@@ -107,7 +111,7 @@ class KnowledgeBaseService(object):
             "create_time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             "operator": "Adrian",
         }
-        self.chroma.add_texts(knowledge_chunks,
+        self.milvus.add_texts(knowledge_chunks,
                               metadatas=[metadata for _ in knowledge_chunks])
         # 把文件的md5值保存起来
         save_md5(md5_hex)
