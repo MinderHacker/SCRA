@@ -5,7 +5,7 @@
 md5_path="./rag/md5.txt"
 
 # aliyun
-DASHSCOPE_API_KEY="sk-2b8080cefca94488aa6efd802dad5e3c"    #填写自己的api key
+DASHSCOPE_API_KEY="..."    #填写自己的api key
 
 # Chroma
 collection_name = "rag"
